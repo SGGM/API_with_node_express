@@ -1,6 +1,11 @@
-import  express, { Router } from "express";
+import express from "express";
 
 const userRouter = express.Router();
+
+userRouter.use((req, res, next) => {
+	console.log('Users middleware');
+	next();
+});
 
 userRouter.post('/login', (req, res) => {
 	res.send('login');
