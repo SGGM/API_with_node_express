@@ -1,22 +1,26 @@
 import express, { Express } from 'express';
-import { userRouter } from './users/users.js';
 import { Server } from 'http';
 import { LoggerService } from './logger/logger.service.js';
+import { UserController } from './users/users.controller.js';
 
 export class App {
 	app: Express;
 	server: Server;
 	port: number;
 	logger: LoggerService;
+	userController: UserController;
 
-	constructor(logger: LoggerService) {
+	constructor(
+		logger: LoggerService,
+		UserController: UserController) {
 		this.app = express();
 		this.port = 8000;
 		this.logger = logger;
+		this.userController = UserController;
 	}
 
 	useRoutes() {
-		this.app.use('/users', userRouter);
+		this.app.use('/users', this.userController.router);
 	}
 
 	public async init() {
