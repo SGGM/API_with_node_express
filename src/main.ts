@@ -7,8 +7,6 @@ import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
 import { IExeptionFilter } from './errors/exeption.filter.interface';
 
-
-
 const appContainer = new Container();
 appContainer.bind<ILogger>(TYPES.ILogger).to(LoggerService);
 appContainer.bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
