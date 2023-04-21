@@ -3,10 +3,11 @@ import { BaseController } from "../common/base.controller";
 import { TYPES } from "../types";
 import { inject, injectable } from "inversify";
 import { ILogger } from "../logger/logger.interface";
+import { IUserConteroller } from "./users.controller.intrface";
 import 'reflect-metadata';
 
 @injectable()
-export class UserController extends BaseController {
+export class UserController extends BaseController implements IUserConteroller {
 	constructor(
 		@inject(TYPES.ILogger) private loggerService: ILogger
 	) {	
