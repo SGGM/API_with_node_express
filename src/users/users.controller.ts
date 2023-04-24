@@ -5,6 +5,7 @@ import { inject, injectable } from 'inversify';
 import { ILogger } from '../logger/logger.interface';
 import { IUserConteroller } from './users.controller.intrface';
 import 'reflect-metadata';
+import { HTTPError } from '../errors/http-error.class';
 
 @injectable()
 export class UserController extends BaseController implements IUserConteroller {
