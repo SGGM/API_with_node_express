@@ -5,7 +5,8 @@ import { inject, injectable } from 'inversify';
 import { ILogger } from '../logger/logger.interface';
 import { IUserConteroller } from './users.controller.intrface';
 import 'reflect-metadata';
-import { HTTPError } from '../errors/http-error.class';
+import { UserLoginDto } from './dto/user.login.dto';
+import { UserRegisterDto } from './dto/user.register.dto';
 
 @injectable()
 export class UserController extends BaseController implements IUserConteroller {
@@ -17,11 +18,11 @@ export class UserController extends BaseController implements IUserConteroller {
 		]);
 	}
 
-	login(req: Request, res: Response, next: NextFunction): void {
+	login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
 		this.ok(res, 'login');
 	}
 
-	register(req: Request, res: Response, next: NextFunction): void {
+	register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
 		this.ok(res, 'register');
 	}
 }
