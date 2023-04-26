@@ -43,7 +43,6 @@ export class UserController extends BaseController implements IUserConteroller {
 				func: this.info,
 				middlewares: [new AuthGuard()],
 			},
-			{ path: '/login', method: 'post', func: this.login },
 		]);
 	}
 
