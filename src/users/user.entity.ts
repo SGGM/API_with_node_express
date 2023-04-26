@@ -10,7 +10,7 @@ export class User {
 	}
 
 	get name(): string {
-		return this.name;
+		return this._name;
 	}
 
 	get password(): string {
