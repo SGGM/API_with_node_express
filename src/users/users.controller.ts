@@ -14,6 +14,7 @@ import { IConfigService } from '../config/config.service.interface';
 import { IUserService } from './users.servise.interface';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
+import { AuthGuard } from '../common/auth.guard';
 
 @injectable()
 export class UserController extends BaseController implements IUserConteroller {
@@ -40,7 +41,7 @@ export class UserController extends BaseController implements IUserConteroller {
 				path: '/info',
 				method: 'get',
 				func: this.info,
-				middlewares: [],
+				middlewares: [new AuthGuard()],
 			},
 			{ path: '/login', method: 'post', func: this.login },
 		]);
@@ -72,7 +73,8 @@ export class UserController extends BaseController implements IUserConteroller {
 	}
 
 	async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
-		this.ok(res, { email: user });
+		const userInfo = await this.userService.getUserInfo(user);
+		this.ok(res, { email: userInfo?.email, id: userInfo?.id });
 	}
 
 	private signJWT(email: string, secret: string): Promise<string> {
